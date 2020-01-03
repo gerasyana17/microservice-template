@@ -1,1 +1,1 @@
-# microservice-template
+# movies-template
