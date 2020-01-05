@@ -1,0 +1,1 @@
+export { AddMovieCommandHandler } from "./add-movie.handler";
