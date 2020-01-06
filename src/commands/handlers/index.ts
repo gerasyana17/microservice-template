@@ -1,1 +1,1 @@
-export { AddMovieCommandHandler } from "./add-movie.handler";
+export * from './create-user.handler';

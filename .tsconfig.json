@@ -4,7 +4,9 @@
         "experimentalDecorators": true,
         "target": "ES6",
         "outDir": "./dist",
-        "baseUrl": "./src"
+        "baseUrl": "./src",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports" : true
     },
     "include": [
         "src/**/*"
