@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
-import { CreateUserCommand } from './commands/impl';
-import { commandBus } from '../shared/utils/command-bus';
+import { CreateUserCommand } from './commands/create-user';
+import { commandBus } from '../shared/services/command-bus';
 
 const router = express.Router({
     strict: true

@@ -1,15 +1,13 @@
 
 import { EventEmitter } from "stream";
 import { IEventBus, IEvent } from "../interfaces";
-import { UserCreatedEventHandler } from '../../src/events/handlers';
-import getClassName from "./get-class-name";
+import getClassName from "../utils/get-class-name";
+import { UserCreatedEventHandler } from "../../src/events";
 
 class EventBus extends EventEmitter implements IEventBus {
-    private _history = [{}]; //TODO: Event store
-
+    
     publish<T extends IEvent>(event: T): void | Promise<any> {
         const eventName = getClassName(event);
-        this._history.push(event);
         this.emit(eventName, event);
     }
 
@@ -22,6 +20,7 @@ class EventBus extends EventEmitter implements IEventBus {
 }
 
 const eventBus = new EventBus();
+
 export {
     eventBus
 }

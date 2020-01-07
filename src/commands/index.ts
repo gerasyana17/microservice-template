@@ -2,13 +2,10 @@ import { ICommand , ICommandHandler} from "../../shared/interfaces/";
 
 //TODO : load handlers and commands dynamically 
 import {
-    CreateUserCommandHandler
-} from './handlers/create-user.handler';
-
-import {
+    CreateUserCommandHandler,
     CreateUserCommand
-}
-    from './impl';
+} from './create-user'
+
 
 //TODO map handler when app is initialed
 //TODO inject into commandbus/eventbus/querybus using DI

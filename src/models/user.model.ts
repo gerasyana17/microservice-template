@@ -1,17 +1,22 @@
-import { UserCreatedEvent } from "../events/impl";
-import { AggregateRoot } from "../../shared/utils/aggregate-root";
-import { eventBus } from "../../shared/utils/event-bus";
-import { UserCreatedEventHandler } from "../events/handlers";
+import { UserCreatedEvent } from "../events";
+import { AggregateRoot } from "../../shared/services/aggregate-root";
+import { NewUser } from "../dto/new-user";
+import { eventBus } from "../../shared/services/event-bus";
+
+enum UserState {
+    Created,
+    Activated,
+    Disactivated,
+    Verified,
+}
 
 export class User extends AggregateRoot {
-    _id: string; 
-    
-    create(data) {
-        //TODO: reiew aggregate root/aggregate 
-       
-        eventBus.publish(new UserCreatedEvent(data));
+    private _state: UserState;
 
-        //apply(process) event from AggregateRoot base class (publish to event)
-        //this.apply(new UserCreatedEvent(data));
+    create(data: NewUser) {
+        this._state = UserState.Created;
+        this.apply(new UserCreatedEvent(data));
+        //TODO move to eventBus into event-store
+        eventBus.publish(new UserCreatedEvent(data));
     }
 }
