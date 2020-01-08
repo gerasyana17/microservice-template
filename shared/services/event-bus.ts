@@ -1,10 +1,10 @@
-
 import { EventEmitter } from "stream";
 import { IEventBus, IEvent } from "../interfaces";
 import getClassName from "../utils/get-class-name";
+//TODO import using DI
 import { UserCreatedEventHandler } from "../../src/events";
 
-class EventBus extends EventEmitter implements IEventBus {
+export class EventBus extends EventEmitter implements IEventBus {
     publish<T extends IEvent>(event: T): void {
         const eventName = getClassName(event);
         this.emit(eventName, event);
@@ -17,9 +17,3 @@ class EventBus extends EventEmitter implements IEventBus {
         });
     }
 }
-
-const eventBus = new EventBus();
-
-export {
-    eventBus
-};

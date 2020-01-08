@@ -2,16 +2,21 @@
     "compilerOptions": {
         "module": "commonjs",
         "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "allowJs": true,
         "target": "ES6",
         "outDir": "./dist",
         "baseUrl": "./src",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports" : true,
-        "noImplicitAny": false
+        "declaration": true,
+        "noImplicitAny": true,
+        "types": ["reflect-metadata"]
     },
     "include": [
-        "src/**/*",
-        "shared/**/*"
+        "*.ts",
+        "src/**/*.ts",
+        "shared/**/*.ts"
     ],
     "exclude": [
         "node_modules"

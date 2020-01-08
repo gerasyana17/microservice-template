@@ -1,9 +1,15 @@
+import "reflect-metadata";
 import { config } from "dotenv";
+
 import * as bodyParser from "body-parser";
 import App from "../shared/utils/app";
 import { router } from "./app.routes";
-import { eventBus } from "../shared/services/event-bus";
 import { UserCreatedEvent } from "./events";
+import { TYPES } from "../shared/types";
+import { IEventBus } from "../shared/interfaces";
+import { EventBus } from "../shared/services/event-bus";
+import { CreateUserCommandHandler, CreateUserCommand } from "./commands";
+import { myContainer } from "../inversify.config";
 
 config();
 const { PORT, API_PATH } = process.env;
@@ -22,4 +28,6 @@ const app = new App({
 
 app.listen();
 
-eventBus.subscribe(UserCreatedEvent.toString());
+/*
+const eventBus = new EventBus();
+eventBus.subscribe(UserCreatedEvent.toString());*/

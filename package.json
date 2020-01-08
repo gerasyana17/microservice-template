@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/main.ts",
   "scripts": {
-    "build": "tsc",
+    "build": " tsc",
+    "start": "node dist/src/server.js",
     "start:dev": "nodemon",
-    "eslint" : "eslint ./src/**/**.ts ./shared/**/**.ts"
+    "eslint": "eslint ./src/**/**.ts ./shared/**/**.ts"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,9 @@
     "amqplib": "^0.5.5",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",
@@ -38,7 +41,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run eslint"
+      "pre-commit": ""
     }
   }
 }

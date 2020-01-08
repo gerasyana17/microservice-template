@@ -1,10 +1,12 @@
-import { IRepository } from "../interfaces/repository.interface";
+import { inject, injectable } from "inversify";
 import { AggregateRoot } from "./aggregate-root";
-import { IEventStore } from "../interfaces";
+import { IRepository, IEventStore } from "../interfaces";
+import { TYPES } from "../types";
 
+@injectable()
 export class Repository<T extends AggregateRoot> implements IRepository<T>  {
-
-	constructor(private readonly _eventStore: IEventStore) { }
+	@inject(TYPES.EventStore) 
+	private readonly _eventStore: IEventStore;
 
 	save(aggregate: T): void {
 		console.log("saving events");
