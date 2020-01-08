@@ -11,5 +11,7 @@ const handlers = new Map<ICommand, ICommandHandler<ICommand>>();
 handlers.set(CreateUserCommand, new CreateUserCommandHandler());
 
 export {
-    handlers
+    handlers,
+    CreateUserCommandHandler,
+    CreateUserCommand
 };

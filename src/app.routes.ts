@@ -1,6 +1,6 @@
 import * as express from "express";
 import { Request, Response } from "express";
-import { CreateUserCommand } from "./commands/create-user";
+import { CreateUserCommand } from "./commands/";
 import { commandBus } from "../shared/services/command-bus";
 import { NewUser } from "./dto/new-user";
 

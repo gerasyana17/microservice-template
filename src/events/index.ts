@@ -9,5 +9,7 @@ const handlers = new Map<IEvent, IEventHandler<IEvent>>();
 handlers.set(UserCreatedEvent, new UserCreatedEventHandler());
 
 export {
-    handlers
+    handlers,
+    UserCreatedEventHandler,
+    UserCreatedEvent
 };
