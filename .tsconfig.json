@@ -6,7 +6,8 @@
         "outDir": "./dist",
         "baseUrl": "./src",
         "esModuleInterop": true,
-        "allowSyntheticDefaultImports" : true
+        "allowSyntheticDefaultImports" : true,
+        "noImplicitAny": false
     },
     "include": [
         "src/**/*",

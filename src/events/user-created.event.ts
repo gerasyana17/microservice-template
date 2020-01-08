@@ -8,11 +8,7 @@ class UserCreatedEventHandler implements IEventHandler<UserCreatedEvent> {
 }
 
 class UserCreatedEvent implements IEvent {
-    payload: NewUser;
-
-    constructor(payload) {
-        this.payload = payload;
-    }
+    constructor(public payload: NewUser) { }
 }
 
 export {
