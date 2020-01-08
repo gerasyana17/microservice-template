@@ -9,10 +9,10 @@
         "allowSyntheticDefaultImports" : true
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
+        "shared/**/*"
     ],
     "exclude": [
-        "node_modules",
-        "src/server.js"
+        "node_modules"
     ]
 }
