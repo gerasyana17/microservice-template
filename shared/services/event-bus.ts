@@ -5,17 +5,16 @@ import getClassName from "../utils/get-class-name";
 import { UserCreatedEventHandler } from "../../src/events";
 
 class EventBus extends EventEmitter implements IEventBus {
-    
-    publish<T extends IEvent>(event: T): void | Promise<any> {
+    publish<T extends IEvent>(event: T): void {
         const eventName = getClassName(event);
         this.emit(eventName, event);
     }
 
-    subscribe(eventName: string): void | Promise<any> {
+    subscribe(eventName: string): void {
         this.on(eventName, (data) => {
             const eventHandler = new UserCreatedEventHandler();
             eventHandler.handle(data);
-        })
+        });
     }
 }
 
@@ -23,4 +22,4 @@ const eventBus = new EventBus();
 
 export {
     eventBus
-}
+};

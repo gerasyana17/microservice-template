@@ -4,7 +4,7 @@ import { ICommand , ICommandHandler} from "../../shared/interfaces/";
 import {
     CreateUserCommandHandler,
     CreateUserCommand
-} from './create-user'
+} from "./create-user";
 
 
 //TODO map handler when app is initialed
@@ -14,4 +14,4 @@ handlers.set(CreateUserCommand, new CreateUserCommandHandler());
 
 export {
     handlers
-}
+};

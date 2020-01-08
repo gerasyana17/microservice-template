@@ -1,9 +1,9 @@
-export interface ICommand { }
+export interface ICommand {}
 
 export interface ICommandHandler<T extends ICommand> {
-  execute(command: T): Promise<any> | void
+  execute(command: T): void;
 }
 
 export interface ICommandBus {
-  execute<T extends ICommand>(command: T): Promise<any>;
+  execute<T extends ICommand>(command: T): void;
 }

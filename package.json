@@ -5,7 +5,8 @@
   "main": "src/main.ts",
   "scripts": {
     "build": "tsc",
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "eslint" : "eslint ./src/**/**.ts ./shared/**/**.ts"
   },
   "repository": {
     "type": "git",
@@ -30,8 +31,14 @@
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "@typescript-eslint/parser": "^2.15.0",
     "eslint": "^6.8.0",
+    "husky": "^4.0.1",
     "nodemon": "^2.0.2",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run eslint"
+    }
   }
 }

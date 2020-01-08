@@ -1,45 +1,43 @@
 import * as express from "express";
-import { Request, Response } from 'express'
-import { Application } from 'express';
 
 interface Router {
     path: string;
-    router: any;
+    router: express.Router;
 }
 
 interface AppOptions {
     port: number;
-    middleWares: any[];
+    middleWares: Array<express.RequestHandler>;
     routerOptions: Router;
 }
 
 class App {
-    public app: Application
-    public port: number
+    public app: express.Application;
+    public port: number;
 
     constructor(options: AppOptions) {
         const { port, middleWares, routerOptions } = options;
-        this.app = express()
-        this.port = port
-        this.middlewares(middleWares)
-        this.router(routerOptions)
+        this.app = express();
+        this.port = port;
+        this._setMiddlewares(middleWares);
+        this._setRouter(routerOptions);
     }
 
-    private middlewares(middleWares: any[]) {
+    private _setMiddlewares(middleWares: Array<express.RequestHandler>): void {
         middleWares.forEach(middleWare => {
-            this.app.use(middleWare)
-        })
+            this.app.use(middleWare);
+        });
     }
 
-    private router({ path, router }: Router) {
-        this.app.get("/ping", (req: Request, res: Response) => res.sendStatus(202));
+    private _setRouter({ path, router }: Router): void {
+        this.app.get("/ping", (req: express.Request, res: express.Response) => res.sendStatus(202));
         this.app.use(path, router);
     }
 
-    public listen() {
+    listen(): void {
         this.app.listen(this.port, () => {
-            console.log(`App listening on the http://localhost:${this.port}`)
-        })
+            console.log(`App listening on the http://localhost:${this.port}`);
+        });
     }
 }
 

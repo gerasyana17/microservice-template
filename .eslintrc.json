@@ -16,14 +16,28 @@
         "SharedArrayBuffer": "readonly"
     },
     "rules": {
-        "quotes": [
+        "@typescript-eslint/no-empty-interface" : "off",
+        "@typescript-eslint/quotes": [
             "error",
             "double"
         ],
-        "semi": [
+        "@typescript-eslint/semi": [
             "error",
             "always"
         ],
-        "@types/"
-    }
+        "@typescript-eslint/explicit-function-return-type": "error"
+    },
+    "overrides": [
+        {
+            "files": "shared/interfaces/**",
+            "rules": {
+                "@typescript-eslint/interface-name-prefix": [
+                    "error",
+                    {
+                        "prefixWithI": "always"
+                    }
+                ]
+            }
+        }
+    ]
 }

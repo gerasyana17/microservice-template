@@ -1,13 +1,14 @@
 import { IEventHandler, IEvent } from "../../shared/interfaces";
+import { NewUser } from "../dto/new-user";
 
 class UserCreatedEventHandler implements IEventHandler<UserCreatedEvent> {
-    handle(event: UserCreatedEvent) {
-        console.log('handling UserCreatedEvent', event);
+    handle(event: UserCreatedEvent): void {
+        console.log("handling UserCreatedEvent", event);
     }
 }
 
 class UserCreatedEvent implements IEvent {
-    payload: any;
+    payload: NewUser;
 
     constructor(payload) {
         this.payload = payload;
@@ -17,4 +18,4 @@ class UserCreatedEvent implements IEvent {
 export {
     UserCreatedEventHandler,
     UserCreatedEvent
-}
+};

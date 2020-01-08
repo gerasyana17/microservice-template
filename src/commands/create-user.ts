@@ -1,7 +1,7 @@
 import { ICommandHandler, ICommand, IRepository } from "../../shared/interfaces";
 import { User } from "../models/user.model";
 import { Repository } from "../../shared/services/repository";
-import { eventStore } from '../event-store';
+import { eventStore } from "../event-store";
 import { NewUser } from "../dto/new-user";
 
 class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand> {
@@ -11,11 +11,11 @@ class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand> {
 		this._userRepository = new Repository<User>(eventStore);
 	}
 
-	execute({ payload }: CreateUserCommand): Promise<any> | void {
-		console.log('executing CreateUserCommandHandler');
+	execute({ payload }: CreateUserCommand): void {
+		console.log("executing CreateUserCommandHandler");
 		const data = {
 			...payload,
-			id: '1'
+			id: "1"
 		};
 		const user = new User();
 		user.create(data);
@@ -30,4 +30,4 @@ class CreateUserCommand implements ICommand {
 export {
 	CreateUserCommandHandler,
 	CreateUserCommand
-}
+};

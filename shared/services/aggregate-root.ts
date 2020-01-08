@@ -8,23 +8,23 @@ export abstract class AggregateRoot {
         return this._id;
     }
 
-    getUncommittedEvents(): Array<IEvent> {
+    getUncommittedIEvents(): Array<IEvent> {
         return this._events;
     }
 
-    markEventsAsCommitted() {
+    markIEventsAsCommitted(): void {
         this._events = new Array<IEvent>();
     }
 
-    loadsFromHistory(events: Array<IEvent>) {
-        events.forEach((event: IEvent) => this.apply(event, false));
+    loadsFromHistory(IEvents: Array<IEvent>): void {
+        IEvents.forEach((IEvent: IEvent) => this.apply(IEvent, false));
     }
 
-    // push atomic aggregate changes to local history for further processing (EventStore.SaveEvents)
-    apply(event: IEvent, isNew: boolean = true) {
-        // this.AsDynamic().Apply(@event);
+    // push atomic aggregate changes to local history for further processing (IEventStore.SaveIEvents)
+    apply(IEvent: IEvent, isNew = true): void {
+        // this.AsDynamic().Apply(@IEvent);
         if (isNew) {
-            this._events.push(event);
+            this._events.push(IEvent);
         }
     }
 }

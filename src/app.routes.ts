@@ -1,7 +1,8 @@
-import * as express from 'express';
-import { Request, Response } from 'express';
-import { CreateUserCommand } from './commands/create-user';
-import { commandBus } from '../shared/services/command-bus';
+import * as express from "express";
+import { Request, Response } from "express";
+import { CreateUserCommand } from "./commands/create-user";
+import { commandBus } from "../shared/services/command-bus";
+import { NewUser } from "./dto/new-user";
 
 const router = express.Router({
     strict: true
@@ -10,11 +11,11 @@ const router = express.Router({
 router.get("/", (req: Request, res: Response) => {
     try {
         //const { data } = req.body;
-        let data = {
+        const data: NewUser = {
             firstName: "Yana",
             lastName: "Yana",
             email: "Yana"
-        }
+        };
         commandBus.execute(new CreateUserCommand(data));
         return res.sendStatus(202);
     } catch (ex) {
@@ -24,4 +25,4 @@ router.get("/", (req: Request, res: Response) => {
 
 export {
     router
-}
+};

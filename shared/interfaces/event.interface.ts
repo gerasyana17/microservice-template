@@ -1,15 +1,15 @@
-export interface IEvent { }
+export interface IEvent {}
 
 export interface IEventHandler<T extends IEvent> {
-    handle(event: T);
+    handle(event: T): void;
 }
 
 export interface IEventBus {
-    publish<T extends IEvent>(event: T): Promise<any> | void;
-    subscribe(eventName: string): Promise<any> | void;
+    publish<T extends Event>(event: T): void;
+    subscribe(eventName: string): void;
 }
 
 export interface IEventStore {
-    save(aggregateId: string, events: Array<IEvent>);
-    getEventsByAggregateId(aggregateId: string);
+    save(aggregateId: string, events: Array<IEvent>): void;
+    getEventsByAggregateId(aggregateId: string): Array<IEvent>;
 }
