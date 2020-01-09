@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { config } from "dotenv";
 import * as bodyParser from "body-parser";
 import App from "../shared/app";
-import { router } from "./routes";
+import { router } from "./routes/user.routes";
 import { EventBus } from "../shared/event-bus";
 import { UserCreatedEvent } from "./events/user-created";
 import Injector from "../inversify.config";
@@ -14,7 +14,7 @@ const app = new App({
     port: +PORT,
     routerOptions: {
         path: API_PATH,
-        router
+        router 
     },
     middleWares: [
         bodyParser.json(),

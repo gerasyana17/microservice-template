@@ -1,6 +1,6 @@
-import Injector from "../inversify.config";
+import Injector from "../../inversify.config";
 import { Router, Request, Response } from "express";
-import { UserController } from "./controllers/user.controller";
+import { UserController } from "../controllers/user.controller";
 
 const cntr = Injector.resolve(UserController);
 const router = Router({
