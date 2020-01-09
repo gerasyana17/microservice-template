@@ -1,8 +1,8 @@
 import { injectable, inject } from "inversify";
 import { Request } from "express";
-import { ICommandBus } from "../../shared/cqrs/commands";
-import { CreateUserCommand } from "../commands/";
-import { User } from "../domain/user.entity";
+import { ICommandBus } from "../../shared/interfaces/commands";
+import { CreateUserCommand } from "../commands";
+import { User } from "../models/user.model";
 import { COMMAND_BUS_IDENTIFIER } from "../../shared/service-identifiers";
 
 @injectable()

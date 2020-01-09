@@ -1,11 +1,11 @@
 import { injectable } from "inversify";
-import { Repository } from "../../shared/ddd/repository";
-import { IEventStore} from "../../shared/cqrs/events";
-import { UserAR } from "../domain/user.aggregate-root";
+import { IRepository } from "../../shared/interfaces/repository";
+import { IEventStore} from "../../shared/interfaces/events";
 import { EventStore } from "../event-store";
+import { UserAR } from "../models/user.model";
 
 @injectable()
-export class UserRepository implements Repository<UserAR>{
+export class UserRepository implements IRepository<UserAR>{
 	private _eventStore: IEventStore = new EventStore();
 
 	save(aggregate: UserAR): void {

@@ -1,4 +1,4 @@
-import { IEventStore, IEvent } from "../shared/cqrs/events";
+import { IEventStore, IEvent } from "../shared/interfaces/events";
 
 export class EventStore implements IEventStore {
 	private _events: Map<string, Array<IEvent>>;

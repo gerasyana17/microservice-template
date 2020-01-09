@@ -1,4 +1,4 @@
-import { ICommand, ICommandHandler } from "../../shared/cqrs/commands";
+import { ICommand, ICommandHandler } from "../../shared/interfaces/commands";
 import { CreateUserCommand, CreateUserCommandHandler } from "./create-user";
 
 const handlersByCommandType = new Map<ICommand, new () => ICommandHandler<ICommand>>();

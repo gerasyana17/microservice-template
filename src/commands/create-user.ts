@@ -1,10 +1,8 @@
 import { inject, injectable } from "inversify";
-import { ICommandHandler, ICommand } from "../../shared/cqrs/commands";
-import { UserAR } from "../domain/user.aggregate-root";
-import { User } from "../domain/user.entity";
-import { Repository } from "../../shared/ddd/repository";
-import { AggregateRoot } from "../../shared/ddd/aggregate-root";
 import { REPOSITYPY_IDENTIFIER } from "../../shared/service-identifiers";
+import { ICommand, ICommandHandler , IRepository } from "../../shared/interfaces";
+import { User, UserAR } from "../models/user.model";
+import { AggregateRoot } from "../../shared/aggregate-root";
 
 export class CreateUserCommand implements ICommand {
 	constructor(public readonly data: User) { }
@@ -12,7 +10,7 @@ export class CreateUserCommand implements ICommand {
 @injectable()
 export class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand> {
 	@inject(REPOSITYPY_IDENTIFIER)
-	private readonly _repository: Repository<AggregateRoot>;
+	private readonly _repository: IRepository<AggregateRoot>;
 
 	execute({ data }: CreateUserCommand): void {
 		console.log("executing CreateUserCommandHandler");

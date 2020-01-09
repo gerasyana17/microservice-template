@@ -30,7 +30,7 @@
     "overrides": [
         {
             "files": [
-                "shared/cqrs/*.ts"
+                "shared/interfaces/*.ts"
             ],
             "rules": {
                 "@typescript-eslint/interface-name-prefix": [

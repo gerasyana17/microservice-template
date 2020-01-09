@@ -1,16 +1,18 @@
 
 import { Container } from "inversify";
-
 import { CommandBus } from "./shared/command-bus";
 import { EventBus } from "./shared/event-bus";
-import { ICommandBus, ICommandHandlersMapper } from "./shared/cqrs/commands";
-import { IEventBus, IEventHandlersMapper } from "./shared/cqrs/events";
 import { UserRepository } from "./src/repositories/user.repository";
-import { Repository } from "./shared/ddd/repository";
-import { AggregateRoot } from "./shared/ddd/aggregate-root";
-
+import { AggregateRoot } from "./shared/aggregate-root";
 import { handlersByCommandType } from "./src/commands/";
 import { handlersByEventType } from "./src/events";
+import {
+	ICommandBus,
+	ICommandHandlersMapper,
+	IEventBus,
+	IEventHandlersMapper,
+	IRepository
+} from "./shared/interfaces/";
 
 import {
 	COMMAND_HANDLER_MAPPER_IDENTIFIER,
@@ -31,7 +33,7 @@ Injector.bind<IEventHandlersMapper>(EVENT_HANDLER_MAPPER_IDENTIFIER).toConstantV
 	handlersByEventType
 });
 
-Injector.bind<Repository<AggregateRoot>>(REPOSITYPY_IDENTIFIER).to(UserRepository).inSingletonScope();
+Injector.bind<IRepository<AggregateRoot>>(REPOSITYPY_IDENTIFIER).to(UserRepository).inSingletonScope();
 
 
 export default Injector;
