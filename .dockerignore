@@ -1,0 +1,7 @@
+.vscode
+.env.*
+.eslintrc.json
+.gitignore
+tsconfig.json
+node_modules
+README.md
