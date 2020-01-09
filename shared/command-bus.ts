@@ -1,13 +1,17 @@
+import Injector from "../inversify.config";
+import { injectable } from "inversify";
 import { ICommandBus, ICommand, ICommandHandler } from "./cqrs/commands";
 import { CreateUserCommand, CreateUserCommandHandler } from "../src/commands/create-user";
 
-const handlers = new Map<ICommand, ICommandHandler<ICommand>>();
-handlers.set(CreateUserCommand, new CreateUserCommandHandler());
+//TOTO store classes in map
+//const handlers = new Map<string, new () => )>();
+//handlers.set("CreateUserCommand", CreateUserCommandHandler.name);
 
+@injectable()
 export class CommandBus implements ICommandBus {
     execute<T extends ICommand>(command: T): void {
-        const { constructor } = Object.getPrototypeOf(command);
-        const commandHandler: ICommandHandler<ICommand> = handlers.get(constructor);
+        //const { constructor } = Object.getPrototypeOf(command);
+        const commandHandler: ICommandHandler<ICommand> = Injector.resolve(CreateUserCommandHandler);
         commandHandler.execute(command);
     }
 }

@@ -1,10 +1,13 @@
+import { injectable, inject } from "inversify";
 import { Request } from "express";
-import { CommandBus } from "../../shared/command-bus";
+import { ICommandBus } from "../../shared/cqrs/commands";
 import { CreateUserCommand } from "../commands/create-user";
 import { User } from "../domain/user.entity";
 
+@injectable()
 export class UserController {
-    private readonly _commandBus: CommandBus = new CommandBus();
+    @inject(Symbol.for("ICommandBus"))
+    private readonly _commandBus: ICommandBus;
 
     create(req: Request): void {
         let data: User = req.body;

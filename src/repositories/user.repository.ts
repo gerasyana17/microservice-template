@@ -1,8 +1,10 @@
+import { injectable } from "inversify";
 import { Repository } from "../../shared/ddd/repository";
 import { IEventStore} from "../../shared/cqrs/events";
 import { UserAR } from "../domain/user.aggregate-root";
 import { EventStore } from "../event-store";
 
+@injectable()
 export class UserRepository implements Repository<UserAR>{
 	private _eventStore: IEventStore = new EventStore();
 

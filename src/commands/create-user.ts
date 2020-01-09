@@ -1,11 +1,14 @@
+import { inject, injectable } from "inversify";
 import { ICommandHandler, ICommand } from "../../shared/cqrs/commands";
 import { UserAR } from "../domain/user.aggregate-root";
 import { User } from "../domain/user.entity";
 import { Repository } from "../../shared/ddd/repository";
-import { UserRepository } from "../repositories/user.repository";
+import { AggregateRoot } from "../../shared/ddd/aggregate-root";
 
+@injectable()
 class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand> {
-	private readonly _repository: Repository<UserAR> = new UserRepository();
+	@inject(Symbol.for("Repository"))
+	private readonly _repository: Repository<AggregateRoot>;
 
 	execute({ data }: CreateUserCommand): void {
 		console.log("executing CreateUserCommandHandler");

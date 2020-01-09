@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { config } from "dotenv";
 import * as bodyParser from "body-parser";
 import App from "../shared/app";
