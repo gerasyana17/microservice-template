@@ -1,25 +1,30 @@
-import { injectable } from "inversify";
-
-import { EventEmitter } from "stream";
-import { IEventBus, IEvent, IEventHandler } from "./cqrs/events";
-import { UserCreatedEventHandler, UserCreatedEvent } from "../src/events/user.created";
+import { injectable, inject } from "inversify";
+import { IEventBus, IEvent, IEventHandler, IEventHandlersMapper } from "./cqrs/events";
+import { EVENT_HANDLER_MAPPER_IDENTIFIER } from "./service-identifiers";
 import getClassName from "./utils/get-class-name";
 
-const handlers = new Map<IEvent, IEventHandler<IEvent>>();
-handlers.set(UserCreatedEvent, new UserCreatedEventHandler());
-
 @injectable()
-export class EventBus extends EventEmitter implements IEventBus {
-    publish<T extends IEvent>(event: T): void {
-        const eventName = getClassName(event);
-        this.emit(eventName, event);
+export class EventBus implements IEventBus {
+    private readonly _handlers: Map<string, new () => IEventHandler<IEvent>>;
+
+    constructor(@inject(EVENT_HANDLER_MAPPER_IDENTIFIER) mapper: IEventHandlersMapper) {
+        //TODO throw error is mapping is not set
+        this._handlers = mapper.handlersByEventType;
     }
 
-    subscribe(eventName: string): void {
-        this.on(eventName, (data) => {
-            console.log(eventName);
-            const eventHandler: IEventHandler<IEvent> = handlers.get(eventName);
-            eventHandler.handle(data);
-        });
+    publish<T extends IEvent>(event: T): void {
+        const eventName = getClassName(event);
+        //this.emit(eventName, event);
+    }
+
+    subscribe(event: string): void {
+         //TODO throw error is handler is not found
+        const handler = this._handlers.get(event);
+
+        //TODO inject EvemntStore
+        /*this.on(event, (data) => {
+             const eventHandler: IEventHandler<IEvent> = _handlers.get(eventName);
+             eventHandler.handle(data);
+        });*/
     }
 }

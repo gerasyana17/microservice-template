@@ -4,7 +4,8 @@ import * as bodyParser from "body-parser";
 import App from "../shared/app";
 import { router } from "./routes";
 import { EventBus } from "../shared/event-bus";
-import { UserCreatedEvent } from "./events/user.created";
+import { UserCreatedEvent } from "./events/user-created";
+import Injector from "../inversify.config";
 
 config();
 const { PORT, API_PATH } = process.env;
@@ -23,5 +24,5 @@ const app = new App({
 
 app.listen();
 
-const eventBus = new EventBus();
-eventBus.subscribe(UserCreatedEvent.toString());
+const eventBus = Injector.resolve(EventBus);
+eventBus.subscribe(UserCreatedEvent.name); //TODO : new type EventType

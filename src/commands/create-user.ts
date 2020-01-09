@@ -4,10 +4,14 @@ import { UserAR } from "../domain/user.aggregate-root";
 import { User } from "../domain/user.entity";
 import { Repository } from "../../shared/ddd/repository";
 import { AggregateRoot } from "../../shared/ddd/aggregate-root";
+import { REPOSITYPY_IDENTIFIER } from "../../shared/service-identifiers";
 
+export class CreateUserCommand implements ICommand {
+	constructor(public readonly data: User) { }
+}
 @injectable()
-class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand> {
-	@inject(Symbol.for("Repository"))
+export class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand> {
+	@inject(REPOSITYPY_IDENTIFIER)
 	private readonly _repository: Repository<AggregateRoot>;
 
 	execute({ data }: CreateUserCommand): void {
@@ -17,12 +21,3 @@ class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand> {
 		this._repository.save(user);
 	}
 }
-
-class CreateUserCommand implements ICommand {
-	constructor(public readonly data: User) { }
-}
-
-export {
-	CreateUserCommandHandler,
-	CreateUserCommand
-};

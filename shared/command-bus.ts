@@ -1,17 +1,22 @@
+import { injectable, inject } from "inversify";
+import { ICommandBus, ICommand, ICommandHandler, ICommandHandlersMapper } from "./cqrs/commands";
+import { COMMAND_HANDLER_MAPPER_IDENTIFIER} from "./service-identifiers";
 import Injector from "../inversify.config";
-import { injectable } from "inversify";
-import { ICommandBus, ICommand, ICommandHandler } from "./cqrs/commands";
-import { CreateUserCommand, CreateUserCommandHandler } from "../src/commands/create-user";
-
-//TOTO store classes in map
-//const handlers = new Map<string, new () => )>();
-//handlers.set("CreateUserCommand", CreateUserCommandHandler.name);
 
 @injectable()
 export class CommandBus implements ICommandBus {
+    private readonly _handlers: Map<ICommand, new () => ICommandHandler<ICommand>>;
+
+    constructor(@inject(COMMAND_HANDLER_MAPPER_IDENTIFIER) mapper: ICommandHandlersMapper) {
+        //TODO throw error is mapping is not set
+        this._handlers = mapper.handlersByCommandType;
+    }
+
     execute<T extends ICommand>(command: T): void {
-        //const { constructor } = Object.getPrototypeOf(command);
-        const commandHandler: ICommandHandler<ICommand> = Injector.resolve(CreateUserCommandHandler);
+        //TODO throw error is handler is not found
+        const { constructor } = Object.getPrototypeOf(command);
+        const handler = this._handlers.get(constructor);
+        const commandHandler: ICommandHandler<ICommand> = Injector.resolve(handler);
         commandHandler.execute(command);
     }
 }

@@ -1,7 +1,7 @@
 import { AggregateRoot } from "../../shared/ddd/aggregate-root";
 import { Guid } from "guid-typescript";
 import { User } from "./user.entity";
-import { UserCreatedEvent } from "../events/user.created";
+import { UserCreatedEvent } from "../events/user-created";
 
 enum UserState {
     Created,
