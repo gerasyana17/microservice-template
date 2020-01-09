@@ -3,7 +3,7 @@ import { IEvent } from "../cqrs/events";
 
 export abstract class AggregateRoot {
     private _events: Array<IEvent>;
-    //MOVE into entity and extend AggregateRoot
+    //TODO : into entity and extend AggregateRoot
     private _id: Guid;
 
     constructor(id?: Guid) {
