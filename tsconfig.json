@@ -6,7 +6,7 @@
         "allowJs": true,
         "target": "ES6",
         "outDir": "./dist",
-        "baseUrl": "./src",
+        "baseUrl": "user.dto.ts",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports" : true,
         "declaration": true,
@@ -15,8 +15,8 @@
     },
     "include": [
         "*.ts",
-        "src/**/*.ts",
-        "shared/**/*.ts"
+        "user.dto.ts/**/*.ts",
+        "shared/**/*.ts", "src"
     ],
     "exclude": [
         "node_modules"

@@ -16,7 +16,7 @@
         "SharedArrayBuffer": "readonly"
     },
     "rules": {
-        "@typescript-eslint/no-empty-interface" : "off",
+        "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/quotes": [
             "error",
             "double"
@@ -29,7 +29,9 @@
     },
     "overrides": [
         {
-            "files": "shared/interfaces/**",
+            "files": [
+                "shared/cqrs/*.ts"
+            ],
             "rules": {
                 "@typescript-eslint/interface-name-prefix": [
                     "error",
