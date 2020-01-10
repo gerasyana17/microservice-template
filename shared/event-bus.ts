@@ -1,5 +1,5 @@
 import { injectable, inject } from "inversify";
-import { IEventBus, IEvent, IEventHandler, IEventHandlersMapper } from "./cqrs/events";
+import { IEventBus, IEvent, IEventHandler, IEventHandlersMapper } from "./interfaces/events";
 import { EVENT_HANDLER_MAPPER_IDENTIFIER } from "./service-identifiers";
 import getClassName from "./utils/get-class-name";
 

@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
-import { IEventHandler, IEvent } from "../../shared/cqrs/events";
-import { User } from "../domain/user.entity";
+import { IEventHandler, IEvent } from "../../shared/interfaces/events";
+import { User } from "../models/user.model";
 
 @injectable()
 class UserCreatedEventHandler implements IEventHandler<UserCreatedEvent> {

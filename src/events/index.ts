@@ -1,4 +1,4 @@
-import { IEvent, IEventHandler } from "../../shared/cqrs/events";
+import { IEvent, IEventHandler } from "../../shared/interfaces/events";
 import { UserCreatedEventHandler, UserCreatedEvent } from "./user-created";
 
 const handlersByEventType = new Map<string, new () => IEventHandler<IEvent>>();

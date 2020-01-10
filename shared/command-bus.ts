@@ -1,5 +1,5 @@
 import { injectable, inject } from "inversify";
-import { ICommandBus, ICommand, ICommandHandler, ICommandHandlersMapper } from "./cqrs/commands";
+import { ICommandBus, ICommand, ICommandHandler, ICommandHandlersMapper } from "./interfaces/commands";
 import { COMMAND_HANDLER_MAPPER_IDENTIFIER} from "./service-identifiers";
 import Injector from "../inversify.config";
 
