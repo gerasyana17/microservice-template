@@ -5,6 +5,7 @@ import { IEntity } from "./interfaces/entity";
 export abstract class AggregateRoot implements IEntity {
     private _events: Array<IEvent>;
     private _id: Guid;
+    private _type: String;
     
     constructor(id?: Guid) {
         this._events = new Array<IEvent>();

@@ -34,9 +34,16 @@ class App {
         this.app.use(path, router);
     }
 
-    listen(): void {
-        this.app.listen(this.port, () => {
-            console.log(`App listening on the http://localhost:${this.port}`);
+    listen(): Promise<null> {
+        return new Promise((resolve, reject) => {
+            this.app.listen(this.port, (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    console.log(`App listening on the http://localhost:${this.port}`);
+                    resolve();
+                }
+            });
         });
     }
 }

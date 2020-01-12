@@ -4,8 +4,7 @@ import { CommandBus } from "./shared/command-bus";
 import { EventBus } from "./shared/event-bus";
 import { UserRepository } from "./src/repositories/user.repository";
 import { AggregateRoot } from "./shared/aggregate-root";
-import { handlersByCommandType } from "./src/commands/";
-import { handlersByEventType } from "./src/events";
+
 import {
 	ICommandBus,
 	IEventBus,
