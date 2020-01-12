@@ -1,13 +1,9 @@
-const COMMAND_HANDLER_MAPPER_IDENTIFIER  = Symbol.for("ICommandHandlersMapper");
 const COMMAND_BUS_IDENTIFIER = Symbol.for("ICommandBus");
-const EVENT_HANDLER_MAPPER_IDENTIFIER = Symbol.for("IEventHandlersMapper");
 const EVENT_BUS_IDENTIFIER = Symbol.for("IEvent");
-const REPOSITYPY_IDENTIFIER = Symbol.for("Repository<T>");
+const REPOSITYPY_IDENTIFIER = Symbol.for("Repository");
 
 export {
 	COMMAND_BUS_IDENTIFIER,
-	COMMAND_HANDLER_MAPPER_IDENTIFIER,
 	EVENT_BUS_IDENTIFIER,
-	EVENT_HANDLER_MAPPER_IDENTIFIER,
 	REPOSITYPY_IDENTIFIER
 };
