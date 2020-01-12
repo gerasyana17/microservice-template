@@ -3,10 +3,8 @@ import { REPOSITYPY_IDENTIFIER } from "../../shared/service-identifiers";
 import { ICommand, ICommandHandler , IRepository } from "../../shared/interfaces";
 import { User, UserAR } from "../models/user.model";
 import { AggregateRoot } from "../../shared/aggregate-root";
+import { CommandHandler } from "../../shared/decorators/";
 
-export class CreateUserCommand implements ICommand {
-	constructor(public readonly data: User) { }
-}
 @injectable()
 export class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand> {
 	@inject(REPOSITYPY_IDENTIFIER)
@@ -18,4 +16,9 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
 		user.create(data);
 		this._repository.save(user);
 	}
+}
+
+@CommandHandler(CreateUserCommandHandler)
+export class CreateUserCommand implements ICommand {
+	constructor(public readonly data: User) { }
 }
