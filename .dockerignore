@@ -1,7 +1,13 @@
 .vscode
-.env.*
-.eslintrc.json
-.gitignore
-tsconfig.json
 node_modules
+scripts
+
+docker-compose.yml
+Dockerfile
+
 README.md
+.env.example
+.gitignore
+
+.eslintrc.json
+nodemon.json

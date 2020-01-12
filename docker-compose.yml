@@ -1,17 +1,19 @@
 version: "2.0"
 
 services:
-    rabbitmq-server:
-        image: rabbitmq:3
-        container_name: rabbitmq-server
+    app:
+        image: test-ms
+        container_name: test-ms-app
+        env_file: 
+            - .env
         ports:
-            - 5672:5672
-            - 15672:15672
-    rabbitmq-manager:
+            - ${PORT}:${PORT} 
+    rabbitmq:
         image: rabbitmq:3-management
-        container_name: rabbitmq-manager
+        container_name: rabbitmq-event-bus
+        env_file: 
+            - .env
         ports:
-            - 8080:5672 
-
-
-        
+            - ${RABBITMQ_CLIENT_PORT}:${RABBITMQ_CLIENT_PORT}
+            - ${RABBITMQ_SERVER_PORT}:${RABBITMQ_SERVER_PORT} 
+            
