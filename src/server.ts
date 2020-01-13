@@ -6,11 +6,7 @@ import { router } from "./routes/user.routes";
 import { MongoHelper } from "./event-store";
 
 config();
-const {
-    PORT,
-    API_PATH,
-    MONGODB_URI
-} = process.env;
+const { PORT, API_PATH, MONGODB_URI } = process.env;
 
 const app = new App({
     port: +PORT,

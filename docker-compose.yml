@@ -1,13 +1,6 @@
 version: "2.0"
 
 services:
-    app:
-        image: test-ms
-        container_name: test-ms-app
-        env_file: 
-            - .env
-        ports:
-            - ${PORT}:${PORT} 
     rabbitmq:
         image: rabbitmq:3-management
         container_name: rabbitmq-event-bus
