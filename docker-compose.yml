@@ -15,5 +15,5 @@ services:
             - .env
         ports:
             - ${RABBITMQ_CLIENT_PORT}:${RABBITMQ_CLIENT_PORT}
-            - ${RABBITMQ_SERVER_PORT}:${RABBITMQ_SERVER_PORT} 
-            
+            - ${RABBITMQ_SERVER_PORT}:${RABBITMQ_SERVER_PORT}   
+    

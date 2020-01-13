@@ -1,19 +1,21 @@
-import { injectable } from "inversify";
-import { IRepository } from "../../shared/interfaces/repository";
-import { IEventStore} from "../../shared/interfaces/events";
-import { EventStore } from "../event-store";
+import { injectable, inject } from "inversify";
+import { Guid } from "guid-typescript";
 import { UserAR } from "../models/user.model";
+import { EVENT_STORE_IDENTIFIER } from "../../shared/service-identifiers";
+import { IRepository } from "../../shared/ddd";
+import { IEventStore } from "../../shared/cqrs";
 
 @injectable()
 export class UserRepository implements IRepository<UserAR>{
-	private _eventStore: IEventStore = new EventStore();
+	@inject(EVENT_STORE_IDENTIFIER)
+	private _eventStore: IEventStore;
 
 	save(aggregate: UserAR): void {
 		console.log("saving events");
-		this._eventStore.save(aggregate.id.toString(), aggregate.getUncommittedIEvents());
+		this._eventStore.save(aggregate.getUncommittedIEvents());
 	}
 
-	getById(id: string): UserAR {
+	getById(id: Guid): UserAR {
         console.log("get aggregate with event history by id");
         const event = this._eventStore.getEventsByAggregateId(id);
 		const userAR = new UserAR();

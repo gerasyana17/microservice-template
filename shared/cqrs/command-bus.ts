@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
-import { ICommandBus, ICommand, ICommandHandler } from "./interfaces/commands";
-import { COMMAND_HANDLER_METADATA_KEY } from "./constants/metadata-keys";
-import Injector from "../inversify.config";
+import Injector from "../../inversify.config";
+import { ICommandBus, ICommand, ICommandHandler } from "./commands";
+import { COMMAND_HANDLER_METADATA_KEY } from "../constants/metadata-keys";
 
 @injectable()
 export class CommandBus implements ICommandBus {

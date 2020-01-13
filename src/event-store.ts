@@ -1,10 +1,16 @@
-import {  injectable } from "inversify";
-import { MongoClient, MongoError } from "mongodb";
-import { IEventStore, IEvent } from "../shared/interfaces/events";
+import { injectable } from "inversify";
+import { Guid } from "guid-typescript";
+import { MongoClient, MongoError, Db } from "mongodb";
+import { IEventStore } from "../shared/cqrs/events";
+import { IEvent } from "../shared/cqrs/event";
 
 @injectable()
 class MongoHelper {
-	public static client: MongoClient;
+	private static client: MongoClient;
+
+	static get db(): Db {
+		return MongoHelper.client.db("eventbus_example") ;
+	}
 
 	static connect(url: string): Promise<MongoClient> {
 		if (MongoHelper.client) {
@@ -17,7 +23,6 @@ class MongoHelper {
 					useNewUrlParser: true,
 					useUnifiedTopology: true
 				}, (err: MongoError, client: MongoClient) => {
-					console.log('r');
 					if (err) {
 						reject(err);
 					} else {
@@ -35,34 +40,29 @@ class MongoHelper {
 	}
 }
 
+@injectable()
 class EventStore implements IEventStore {
-	private _events: Map<string, Array<IEvent>>;
+	private db: Db;
 
-	save(aggregateId: string, events: Array<IEvent>): void {
+	constructor() {
+		this.db = MongoHelper.db;
+	}
+
+	save(events: Array<IEvent>): void {
 		console.log("saving in mongodb");
-		/*const aggregateEvents = this._events.get(aggregateId);
-		
-		if (!aggregateEvents) {
-			return;
-		}*/
-
-		console.log(MongoHelper.client);
-		MongoHelper.client.db("eventbus_example").collection("test").insert({ test : "eee"}, (err) => {
+		this.db.collection("test").insertMany(events, (err) => {
 			console.log(err);
 		});
 
-		/*
-		events.forEach((event: IEvent) => aggregateEvents.push(event));
-		this._events.set(aggregateId, aggregateEvents); */
-
-		console.log("TODO: publishing in rabbitmq");
 		//TODO remove local stprage after real event bus
 		//const eventBus = new EventBus();
 		// eventBus.publish(new UserCreatedEvent(data));
 	}
 
-	getEventsByAggregateId(aggregateId: string): Array<IEvent> {
-		return this._events.get(aggregateId);
+	getEventsByAggregateId(_id: Guid): Array<IEvent> {
+		return null;
+		//TODO
+		//return this.db.collection("test").find({ _id }).toArray();
 	}
 }
 

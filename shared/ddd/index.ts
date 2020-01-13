@@ -1,4 +1,3 @@
-export * from "./commands";
+export * from "./aggregate-root";
 export * from "./entity";
-export * from "./events";
 export * from "./repository";

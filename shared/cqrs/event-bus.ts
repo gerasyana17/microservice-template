@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { injectable } from "inversify";
-import { IEventBus, IEvent, IEventHandler } from "./interfaces/events";
-import getClassName from "./utils/get-class-name";
+import { IEventBus } from "./events";
+import { IEvent } from "./event";
+import getClassName from "../utils/get-class-name";
 
 @injectable()
 export class EventBus implements IEventBus {
-    publish<T extends IEvent>(event: T): void {
+    publish(event: IEvent): void {
         const eventName = getClassName(event);
+        console.log(event);
         //this.emit(eventName, event);
     }
 

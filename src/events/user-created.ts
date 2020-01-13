@@ -1,6 +1,8 @@
 import { injectable } from "inversify";
-import { IEventHandler, IEvent } from "../../shared/interfaces/events";
+import { Guid } from "guid-typescript";
+import { IEventHandler } from "../../shared/cqrs/events";
 import { User } from "../models/user.model";
+import { IEvent } from "../../shared/cqrs/event";
 
 @injectable()
 class UserCreatedEventHandler implements IEventHandler<UserCreatedEvent> {
@@ -9,8 +11,11 @@ class UserCreatedEventHandler implements IEventHandler<UserCreatedEvent> {
     }
 }
 
-class UserCreatedEvent implements IEvent {
-    constructor(public payload: User) { }
+class UserCreatedEvent extends IEvent {
+    constructor(id: Guid, payload: User) {
+        super(id, payload);
+        this.type = "UserCreated";
+    }
 }
 
 export {

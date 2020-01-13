@@ -1,9 +1,9 @@
 import { injectable, inject } from "inversify";
 import { Request } from "express";
-import { ICommandBus } from "../../shared/interfaces/commands";
+import { ICommandBus } from "../../shared/cqrs/";
 import { CreateUserCommand } from "../commands";
-import { User } from "../models/user.model";
 import { COMMAND_BUS_IDENTIFIER } from "../../shared/service-identifiers";
+import { NewUserDTO } from "../dto/user.dto";
 
 @injectable()
 export class UserController {
@@ -11,7 +11,7 @@ export class UserController {
     private readonly _commandBus: ICommandBus;
 
     create(req: Request): void {
-        let data: User = req.body;
+        let data: NewUserDTO = req.body;
         data = {
             firstName: "Yana",
             lastName: "Yana",

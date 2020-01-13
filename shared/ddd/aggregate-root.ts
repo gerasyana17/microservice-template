@@ -1,21 +1,15 @@
 import { Guid } from "guid-typescript";
-import { IEvent } from "./interfaces/events";
-import { IEntity } from "./interfaces/entity";
+import { IEvent } from "../cqrs/";
 
-export abstract class AggregateRoot implements IEntity {
+export abstract class AggregateRoot {
     private _events: Array<IEvent>;
-    private _id: Guid;
-    private _type: String;
-    
+    protected _id: Guid;
+
     constructor(id?: Guid) {
         this._events = new Array<IEvent>();
         this._id = id ? id : Guid.create();
     }
     
-    get id(): Guid {
-        return this._id;
-    }
-
     getUncommittedIEvents(): Array<IEvent> {
         return this._events;
     }
