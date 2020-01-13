@@ -1,13 +1,7 @@
 import { AggregateRoot } from "../../shared/ddd/aggregate-root";
 import { UserCreatedEvent } from "../events";
 import { IEntity } from "../../shared/ddd";
-
-enum UserState {
-    Created,
-    Activated,
-    Disactivated,
-    Verified,
-}
+import { Guid } from "guid-typescript";
 
 export class User implements IEntity {
     constructor(
@@ -19,14 +13,12 @@ export class User implements IEntity {
 }
 
 export class UserAR extends AggregateRoot {
-    private _state: UserState;
 
-    constructor() {
-        super();
-        this._state = UserState.Created;
+    constructor(id?: Guid) {
+        super(id);
     }
 
     create(data: User): void {
-        this.apply(new UserCreatedEvent(this._id, data));
+        this.apply(new UserCreatedEvent(Guid.create(), data));
     }
 }

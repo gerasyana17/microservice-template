@@ -17,9 +17,9 @@ export class UserRepository implements IRepository<UserAR>{
 
 	getById(id: Guid): UserAR {
         console.log("get aggregate with event history by id");
-        const event = this._eventStore.getEventsByAggregateId(id);
+        const events = this._eventStore.getEventsByAggregateId(id);
 		const userAR = new UserAR();
-		userAR.loadFromHistory(event);
+		userAR.loadFromHistory(events); 
 		return userAR;
 	}
 }
