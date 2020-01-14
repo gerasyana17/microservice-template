@@ -1,15 +1,15 @@
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
 import { Guid } from "guid-typescript";
 import { MongoClient, MongoError, Db } from "mongodb";
-import { IEventStore } from "../shared/cqrs/events";
-import { IEvent } from "../shared/cqrs/event";
+import { IEventStore, IEventBus, IEvent } from "../../shared/cqrs/";
+import { EVENT_BUS_IDENTIFIER } from "../../shared/service-identifiers";
 
 @injectable()
 class MongoHelper {
 	private static client: MongoClient;
 
 	static get db(): Db {
-		return MongoHelper.client.db("eventbus_example") ;
+		return MongoHelper.client.db("eventbus_example");
 	}
 
 	static connect(url: string): Promise<MongoClient> {
@@ -42,6 +42,8 @@ class MongoHelper {
 
 @injectable()
 class EventStore implements IEventStore {
+	@inject(EVENT_BUS_IDENTIFIER)
+	private _eventBus: IEventBus;
 	private db: Db;
 
 	constructor() {
@@ -54,9 +56,7 @@ class EventStore implements IEventStore {
 			console.log(err);
 		});
 
-		//TODO remove local stprage after real event bus
-		//const eventBus = new EventBus();
-		// eventBus.publish(new UserCreatedEvent(data));
+		this._eventBus.publish(events);
 	}
 
 	getEventsByAggregateId(_id: Guid): Array<IEvent> {

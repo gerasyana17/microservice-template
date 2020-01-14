@@ -21,6 +21,8 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
 }
 
 @CommandHandler(CreateUserCommandHandler)
-export class CreateUserCommand implements ICommand {
-	constructor(public readonly data: User) { }
+export class CreateUserCommand extends ICommand {
+	constructor(public readonly data: User) {
+		super();
+	 }
 }

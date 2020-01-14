@@ -7,8 +7,8 @@
     "build": " tsc",
     "start": "node dist/src/server.js",
     "start:dev": "nodemon",
-    "start:provider": "ts-node src/rabbitmq-provider.ts",
-    "start:consumer": "ts-node src/rabbitmq-consumer.ts",
+    "start:provider": "ts-node src/event-store-test/rabbitmq-provider.ts",
+    "start:consumer": "ts-node src/event-store-test/rabbitmq-consumer.ts",
     "eslint": "eslint ./src/**/**.ts ./shared/**/**.ts"
   },
   "repository": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/gerasyana17/microservice-template#readme",
   "dependencies": {
+    "amqp-ts": "^1.8.0",
     "amqplib": "^0.5.5",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",

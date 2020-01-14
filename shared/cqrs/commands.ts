@@ -1,4 +1,4 @@
-export interface ICommand { }
+export abstract class ICommand { }
 
 export interface ICommandHandler<T extends ICommand> {
   execute(command: T): void;
