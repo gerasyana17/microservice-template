@@ -46,6 +46,8 @@ export class RabbitMQEventBus implements IEventBus {
 
         this._queue.activateConsumer((message) => {
             console.log("Message received: " + message.getContent());
+        }, {
+            noAck: true
         });
     }
 }

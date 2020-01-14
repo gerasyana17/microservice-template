@@ -33,7 +33,6 @@ app.listen()
     })
     .catch((err: string) => console.log("Error while trying to initialize server", err));
 
-/*
+
 const eventBus = Injector.resolve(RabbitMQEventBus);
 eventBus.subscribe("test");
-*/
