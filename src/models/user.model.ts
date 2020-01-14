@@ -27,6 +27,10 @@ export class UserAR extends AggregateRoot {
     }
 
     create(data: User): void {
-        this.apply(new UserCreatedEvent(this._id, data));
+        const event = new UserCreatedEvent(this._id, {
+            ...data,
+            active: false
+        });
+        this.apply(event);
     }
 }
