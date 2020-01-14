@@ -11,7 +11,7 @@ class UserCreatedEventHandler implements IEventHandler<UserCreatedEvent> {
 }
 
 class UserCreatedEvent extends IEvent {
-    constructor(id: Guid, payload: User) {
+    constructor(public readonly id: Guid, payload: User) {
         super(id, payload);
         this.type = "UserCreated";
     }

@@ -1,29 +1,16 @@
-import { AggregateRoot } from "../../shared/ddd/aggregate-root";
 import { UserCreatedEvent } from "../events";
-import { IEntity } from "../../shared/ddd";
+import { IAggregate, AggregateRoot } from "../../shared/ddd";
 
-enum UserState {
-    Created,
-    Activated,
-    Disactivated,
-    Verified,
+export class User implements IAggregate {
+    firstName: string;
+    lastName: string;
+    email: string;
+    active?: boolean;
 }
 
-export class User implements IEntity {
-    constructor(
-        public firstName: string,
-        public lastName: string,
-        public email: string,
-        public active?: boolean) {
-    }
-}
-
-export class UserAR extends AggregateRoot {
-    private _state: UserState;
-
+export class UserAR extends AggregateRoot<User> {
     constructor() {
         super();
-        this._state = UserState.Created;
     }
 
     create(data: User): void {

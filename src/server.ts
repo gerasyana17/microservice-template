@@ -3,7 +3,7 @@ import { config } from "dotenv";
 import * as bodyParser from "body-parser";
 import App from "../shared/app";
 import { router } from "./routes/user.routes";
-import { MongoHelper } from "./event-store/event-store";
+import { MongoHelper } from "./event-store/";
 import Injector from "../inversify.config";
 import { RabbitMQEventBus } from "./event-store";
 
@@ -24,7 +24,7 @@ const app = new App({
 
 app.listen()
     .then(async () => {
-        try {
+       try {
             await MongoHelper.connect(MONGODB_URI);
             console.info("Connected to Mongo");
         } catch (err) {
@@ -33,6 +33,7 @@ app.listen()
     })
     .catch((err: string) => console.log("Error while trying to initialize server", err));
 
-
+/*
 const eventBus = Injector.resolve(RabbitMQEventBus);
 eventBus.subscribe("test");
+*/
