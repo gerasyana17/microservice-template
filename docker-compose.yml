@@ -2,11 +2,11 @@ version: "2.0"
 
 services:
     rabbitmq:
-        image: rabbitmq:3-management
+        image: rabbitmq
         container_name: rabbitmq-event-bus
         env_file: 
             - .env
         ports:
-            - ${RABBITMQ_CLIENT_PORT}:${RABBITMQ_CLIENT_PORT}
-            - ${RABBITMQ_SERVER_PORT}:${RABBITMQ_SERVER_PORT}   
+            - ${RABBITMQ_WEB_UI_PORT}:${RABBITMQ_WEB_UI_PORT}
+            - ${RABBITMQ_BROKER_PORT}:${RABBITMQ_BROKER_PORT}   
     
