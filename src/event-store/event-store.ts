@@ -1,24 +1,32 @@
 import { injectable, inject } from "inversify";
+import { config } from "dotenv";
 import { Guid } from "guid-typescript";
 import { MongoClient, MongoError, Db } from "mongodb";
-import { IEventStore, IEventBus, IEvent } from "../../shared/cqrs/";
+import { IEventStore, IEventBus, IEvent } from "../../shared/cqrs";
 import { EVENT_BUS_IDENTIFIER } from "../../shared/service-identifiers";
+
+config();
+const {
+	MONGODB_URI,
+	MONGODB_DATABASE,
+	MONGODB_COLLECTION
+} = process.env;
 
 @injectable()
 class MongoHelper {
 	private static client: MongoClient;
 
 	static get db(): Db {
-		return MongoHelper.client.db("eventbus_example");
+		return MongoHelper.client.db(MONGODB_DATABASE);
 	}
 
-	static connect(url: string): Promise<MongoClient> {
+	static connect(): Promise<MongoClient> {
 		if (MongoHelper.client) {
 			return Promise.resolve(MongoHelper.client);
 		}
 
 		return new Promise<MongoClient>((resolve, reject) => {
-			MongoClient.connect(url,
+			MongoClient.connect(MONGODB_URI,
 				{
 					useNewUrlParser: true,
 					useUnifiedTopology: true
@@ -52,7 +60,7 @@ class EventStore implements IEventStore {
 
 	save(events: Array<IEvent>): void {
 		console.log("saving in mongodb");
-		this.db.collection("test").insertMany(events, (err) => {
+		this.db.collection(MONGODB_COLLECTION).insertMany(events, (err) => {
 			console.log(err);
 		});
 

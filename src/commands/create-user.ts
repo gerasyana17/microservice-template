@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { REPOSITYPY_IDENTIFIER } from "../../shared/service-identifiers";
 import { ICommand, ICommandHandler } from "../../shared/cqrs";
 import { IRepository, RepositoryType } from "../../shared/ddd";
-import { CommandHandler } from "../../shared/decorators/";
+import { CommandHandler } from "../../shared/decorators";
 import { UserAR, User } from "../models/user.model";
 
 @injectable()

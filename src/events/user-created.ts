@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { Guid } from "guid-typescript";
-import { IEvent, IEventHandler } from "../../shared/cqrs/events";
+import { IEvent, IEventHandler } from "../../shared/cqrs";
 import { User } from "../models/user.model";
 
 @injectable()

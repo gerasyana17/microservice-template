@@ -1,9 +1,9 @@
 
 import { Container } from "inversify";
-import { CommandBus } from "./shared/cqrs/";
 import { UserRepository } from "./src/repositories/user.repository";
-import { IRepository, RepositoryType } from "./shared/ddd";
 import { EventStore, RabbitMQEventBus } from "./src/event-store/";
+import { CommandBus } from "./shared/cqrs";
+import { IRepository, RepositoryType } from "./shared/ddd";
 
 import {
 	ICommandBus,

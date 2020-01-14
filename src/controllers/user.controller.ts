@@ -1,7 +1,7 @@
 import { injectable, inject } from "inversify";
 import { Request } from "express";
-import { ICommandBus } from "../../shared/cqrs/";
 import { CreateUserCommand } from "../commands";
+import { ICommandBus } from "../../shared/cqrs";
 import { COMMAND_BUS_IDENTIFIER } from "../../shared/service-identifiers";
 import { NewUserDTO } from "../dto/user.dto";
 

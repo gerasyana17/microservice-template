@@ -25,7 +25,7 @@ const app = new App({
 app.listen()
     .then(async () => {
        try {
-            await MongoHelper.connect(MONGODB_URI);
+            await MongoHelper.connect();
             console.info("Connected to Mongo");
         } catch (err) {
             console.error("Unable to connect to Mongo!", err);
