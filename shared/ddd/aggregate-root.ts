@@ -29,7 +29,7 @@ export abstract class AggregateRoot<T extends IAggregate> {
         isNew && this._events.push(event);
     }
 
-    private _setState<T extends IAggregate>(state: T): void {
+    protected _setState<T extends IAggregate>(state: T): void {
         this._state = {
             ...this._state,
             ...state
