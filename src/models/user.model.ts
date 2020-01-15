@@ -1,11 +1,12 @@
 import { UserCreatedEvent } from "../events";
 import { IAggregate, AggregateRoot } from "../../shared/ddd";
 
+
 export class User implements IAggregate {
-    firstName: string;
-    lastName: string;
-    email: string;
-    active?: boolean;
+    public firstName: string;
+    public lastName: string;
+    public email: string;
+    public active?: boolean;
 }
 
 export class UserAR extends AggregateRoot<User> {
