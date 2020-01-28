@@ -61,7 +61,9 @@ class EventStore implements IEventStore {
 	save(events: Array<IEvent>): void {
 		console.log("saving in mongodb");
 		this.db.collection(MONGODB_COLLECTION).insertMany(events, (err) => {
-			console.log(err);
+			if (err) {
+				console.log(err);
+			}
 		});
 
 		this._eventBus.publish(events);
